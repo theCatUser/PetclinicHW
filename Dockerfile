@@ -1,4 +1,8 @@
-FROM openjdk:8
-EXPOSE 8080
-ADD target/spring-petclinic-*.jar petclinic.jar
-ENTRYPOINT ["java","-jar","/petclinic.jar"]
+FROM jenkins/jenkins:lts
+USER root
+# Install OpenJDK 8
+RUN apt-get update && \
+    apt-get install -y openjdk-8-jdk
+# Install Maven
+RUN apt-get install -y maven
+USER jenkins

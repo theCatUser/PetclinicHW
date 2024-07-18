@@ -8,12 +8,7 @@ pipeline {
     stages{
         stage("Compile Project"){
             steps{
-            sh '''
-               export M2_HOME=/var/apache-maven
-               export MAVEN_HOME=/var/apache-maven
-               export PATH=${M2_HOME}/bin:${PATH}
-               mvn clean compile
-            '''
+                sh "mvn clean compile"
             }
         }
 

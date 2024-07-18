@@ -43,7 +43,6 @@ services:
     volumes:
       - jenkins_home:/var/jenkins_home
       - /var/run/docker.sock:/var/run/docker.sock
-      - ./apache-maven:/var/apache-maven
     depends_on:
       - mysql
     networks:
