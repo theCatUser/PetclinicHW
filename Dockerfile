@@ -10,10 +10,8 @@ RUN apt-get update && \
     apt-get update && \
     apt-get install -y docker-ce-cli
 
-# Install OpenJDK-11
-RUN apt-get update && \
-    apt-get install -y openjdk-11-jre-headless && \
-    apt-get clean
+# Install OpenJDK 8
+RUN apt-get install -y openjdk-8-jre
 
 # Install Maven
 RUN apt-get install -y maven
