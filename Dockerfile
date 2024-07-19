@@ -10,5 +10,6 @@ RUN apt-get update && \
 # Set Maven environment variables
 ENV MAVEN_HOME=/usr/share/maven
 ENV MAVEN_CONFIG="/var/maven/.m2"
+ENV PATH=${MAVEN_HOME}/bin:${PATH}
 
 USER jenkins
