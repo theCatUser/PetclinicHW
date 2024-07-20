@@ -13,5 +13,8 @@ RUN apt-get update && \
 # Add the Jenkins user to the Docker group
 RUN usermod -aG docker jenkins
 
+# Change Docker socket permissions
+RUN chmod 666 /var/run/docker.sock
+
 # Switch back to the Jenkins user
 USER jenkins
