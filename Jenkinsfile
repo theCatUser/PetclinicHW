@@ -61,8 +61,8 @@ pipeline {
                 withCredentials([string(credentialsId: 'sudo_password', variable: 'SUDO_PASSWORD')]) {
                     script {
                         sh '''
-                           echo $SUDO_PASSWORD | sudo -S usermod -aG docker $(whoami)
-                           echo $SUDO_PASSWORD | sudo -S systemctl restart docker
+                           usermod -aG docker jenkins
+                           systemctl restart docker
                         '''
                     }
                 }
