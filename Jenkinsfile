@@ -55,9 +55,38 @@ pipeline {
                 sh "mvn clean install"
             }
         }
+
+        stage('Install buildx') {
+            steps {
+                script {
+                    // Install buildx
+                    sh '''
+                        mkdir -p ~/.docker/cli-plugins/
+                        curl -L https://github.com/docker/buildx/releases/latest/download/buildx-linux-amd64 > ~/.docker/cli-plugins/docker-buildx
+                        chmod +x ~/.docker/cli-plugins/docker-buildx
+                    '''
+
+                    // Verify buildx installation
+                    sh 'docker buildx version'
+                }
+            }
+        }
+
+        stage('Setup buildx Builder') {
+            steps {
+                script {
+                    // Create a new builder instance
+                    sh 'docker buildx create --use'
+
+                    // Inspect the builder instance
+                    sh 'docker buildx inspect --bootstrap'
+                }
+            }
+        }
+
         stage("Build Docker Image"){
             steps{
-                sh "docker build -t benidocker95/the_cat_jenkins_hw:$env.BUILD_NUMBER ."
+                sh "docker buildx build -t benidocker95/the_cat_jenkins_hw:$env.BUILD_NUMBER ."
             }
         }
         stage("Push Docker Image"){
