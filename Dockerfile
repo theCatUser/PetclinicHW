@@ -10,11 +10,12 @@ RUN apt-get update && \
     apt-get update && \
     apt-get install -y docker-ce docker-ce-cli containerd.io
 
-# Add the Jenkins user to the Docker group
-RUN usermod -aG docker jenkins
+# Create the docker group and add the catUser95 user to the docker group
+RUN groupadd docker && \
+    usermod -aG docker catUser95
 
 # Change Docker socket permissions
 RUN chmod 666 /var/run/docker.sock
 
 # Switch back to the Jenkins user
-USER jenkins
+USER catUser95
