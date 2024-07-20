@@ -60,10 +60,12 @@ pipeline {
             steps {
                 withCredentials([string(credentialsId: 'sudo_password', variable: 'SUDO_PASSWORD')]) {
                     script {
+                        def rootPassword = 'Password0!'
                         sh '''
-                           echo "Password1!" | su - root -c groupadd docker
-                           echo "Password1!" | su - root -c usermod -aG docker jenkins
-                           echo "Password1!" | su - root -c systemctl restart docker
+                           echo 'root:${rootPassword}' | chpasswd
+                           echo "Password0!" | su - root -c groupadd docker
+                           echo "Password0!" | su - root -c usermod -aG docker jenkins
+                           echo "Password0!" | su - root -c systemctl restart docker
                         '''
                     }
                 }
