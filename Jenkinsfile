@@ -10,31 +10,32 @@ pipeline {
         }
 
     stages{
-    stage('Download and Unpack JDK') {
-                steps {
-                    script {
-                        sh '''
-                            # Download JDK tarball
-                            curl -L -o /var/jenkins_home/tools/jdk.tar.gz ${JAVA_URL}
+        stage('Download and Unpack JDK') {
+            steps {
+                script {
+                    sh '''
+                        # Download JDK tarball
+                        curl -L -o /var/jenkins_home/tools/jdk.tar.gz ${JAVA_URL}
 
-                            # Create directory for JDK if it doesn't exist
-                            mkdir -p ${JAVA_HOME_DIR}
+                        # Create directory for JDK if it doesn't exist
+                        mkdir -p ${JAVA_HOME_DIR}
 
-                            # Unpack the tarball into the directory
-                            tar -xzf /var/jenkins_home/tools/jdk.tar.gz -C ${JAVA_HOME_DIR} --strip-components=1
+                        # Unpack the tarball into the directory
+                        tar -xzf /var/jenkins_home/tools/jdk.tar.gz -C ${JAVA_HOME_DIR} --strip-components=1
 
-                            # Clean up the tarball
-                            rm /var/jenkins_home/tools/jdk.tar.gz
-                        '''
+                        # Clean up the tarball
+                        rm /var/jenkins_home/tools/jdk.tar.gz
+                    '''
 
-                        // Set JAVA_HOME environment variable
-                        env.JAVA_HOME = "${JAVA_HOME_DIR}"
-                        echo "JAVA_HOME is set to: ${env.JAVA_HOME}"
+                    // Set JAVA_HOME environment variable
+                    env.JAVA_HOME = "${JAVA_HOME_DIR}"
+                    echo "JAVA_HOME is set to: ${env.JAVA_HOME}"
 
-                        // Add JAVA_HOME to the PATH
-                        env.PATH = "${env.JAVA_HOME}/bin:${env.PATH}"
-                    }
+                    // Add JAVA_HOME to the PATH
+                    env.PATH = "${env.JAVA_HOME}/bin:${env.PATH}"
                 }
+            }
+        }
 
         stage("Compile Project"){
             steps{
