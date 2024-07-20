@@ -59,11 +59,11 @@ pipeline {
         stage('Install buildx') {
             steps {
                 script {
-                    // Install buildx
+                    // Download and install buildx
                     sh '''
-                        mkdir -p ~/.docker/cli-plugins/
-                        curl -L https://github.com/docker/buildx/releases/latest/download/buildx-linux-amd64 > ~/.docker/cli-plugins/docker-buildx
-                        chmod +x ~/.docker/cli-plugins/docker-buildx
+                        mkdir -p /var/jenkins_home/.docker/cli-plugins/
+                        curl -sSL https://github.com/docker/buildx/releases/latest/download/buildx-linux-amd64 -o /var/jenkins_home/.docker/cli-plugins/docker-buildx
+                        chmod +x /var/jenkins_home/.docker/cli-plugins/docker-buildx
                     '''
 
                     // Verify buildx installation
