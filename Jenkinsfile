@@ -3,7 +3,7 @@ pipeline {
     tools{
         jdk 'java 8'
         maven 'Maven 3.8.7'
-        docker 'Docker 27.0.3'
+        dockerTool 'Docker 27.0.3'
     }
     environment {
             JAVA_URL = 'https://builds.openlogic.com/downloadJDK/openlogic-openjdk/8u412-b08/openlogic-openjdk-8u412-b08-linux-x64.tar.gz'
