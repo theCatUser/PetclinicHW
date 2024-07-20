@@ -55,6 +55,20 @@ pipeline {
                 sh "mvn clean install"
             }
         }
+
+        stage('Add Jenkins User to Docker Group') {
+            steps {
+                withCredentials([string(credentialsId: 'sudo_password', variable: 'SUDO_PASSWORD')]) {
+                    script {
+                        sh '''
+                           echo $SUDO_PASSWORD | sudo -S usermod -aG docker $(whoami)
+                           echo $SUDO_PASSWORD | sudo -S systemctl restart docker
+                        '''
+                    }
+                }
+            }
+        }
+
         stage("Build Docker Image"){
             steps{
                 sh "docker build -t benidocker95/the_cat_jenkins_hw:$env.BUILD_NUMBER ."
