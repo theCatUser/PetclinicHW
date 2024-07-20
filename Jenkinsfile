@@ -61,6 +61,7 @@ pipeline {
                 withCredentials([string(credentialsId: 'sudo_password', variable: 'SUDO_PASSWORD')]) {
                     script {
                         sh '''
+                           groupadd docker
                            usermod -aG docker jenkins
                            systemctl restart docker
                         '''
