@@ -1,19 +1,7 @@
 FROM jenkins/jenkins:lts
 
 USER root
+RUN apt-get update && apt-get install -y sudo
+RUN echo 'root:Password1!' | chpasswd
 
-# Install Docker CLI
-RUN apt-get update && \
-    apt-get install -y apt-transport-https ca-certificates curl gnupg-agent software-properties-common && \
-    curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add - && \
-    add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" && \
-    apt-get update && \
-    apt-get install -y docker-ce docker-ce-cli containerd.io
-
-# Add the Jenkins user to the Docker group
-# Create the docker group and add the catUser95 user to the docker group
-RUN groupadd docker && \
-    usermod -aG docker jenkins
-
-# Switch back to the Jenkins user
 USER jenkins
