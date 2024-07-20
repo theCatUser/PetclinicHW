@@ -2,14 +2,16 @@ FROM jenkins/jenkins:lts
 
 USER root
 
-# Install Maven
+# Install Docker CLI
 RUN apt-get update && \
-    apt-get install -y maven && \
-    apt-get clean
+    apt-get install -y apt-transport-https ca-certificates curl gnupg-agent software-properties-common && \
+    curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add - && \
+    add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" && \
+    apt-get update && \
+    apt-get install -y docker-ce docker-ce-cli containerd.io
 
-# Set Maven environment variables
-ENV MAVEN_HOME=/usr/share/maven
-ENV MAVEN_CONFIG="/var/maven/.m2"
-ENV PATH=${MAVEN_HOME}/bin:${PATH}
+# Add the Jenkins user to the Docker group
+RUN usermod -aG docker jenkins
 
+# Switch back to the Jenkins user
 USER jenkins
