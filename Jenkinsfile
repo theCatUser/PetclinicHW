@@ -58,17 +58,15 @@ pipeline {
 
         stage('Add Jenkins User to Docker Group') {
             steps {
-                withCredentials([string(credentialsId: 'sudo_password', variable: 'SUDO_PASSWORD')]) {
                     script {
-                        def rootPassword = 'Password0!'
+//                         def rootPassword = 'Password0!'
                         sh '''
-                           echo 'root:${rootPassword}' | chpasswd
-                           echo "Password0!" | su - root -c groupadd docker
-                           echo "Password0!" | su - root -c usermod -aG docker jenkins
-                           echo "Password0!" | su - root -c systemctl restart docker
+//                            echo 'root:${rootPassword}' | chpasswd
+                           echo "BeniJenkins1!" | su - root -c groupadd docker
+                           echo "BeniJenkins1!" | su - root -c usermod -aG docker jenkins
+                           echo "BeniJenkins1!" | su - root -c systemctl restart docker
                         '''
                     }
-                }
             }
         }
 
