@@ -62,7 +62,7 @@ pipeline {
                     // Download and install buildx
                     sh '''
                         mkdir -p /var/jenkins_home/.docker/cli-plugins/
-                        curl -sSL https://github.com/docker/buildx/releases/latest/download/buildx-linux-amd64 -o /var/jenkins_home/.docker/cli-plugins/docker-buildx
+                        curl -sSL https://github.com/docker/buildx/releases/download/v0.16.1/buildx-v0.16.1.linux-amd64 -o /var/jenkins_home/.docker/cli-plugins/docker-buildx
                         chmod +x /var/jenkins_home/.docker/cli-plugins/docker-buildx
                     '''
 
