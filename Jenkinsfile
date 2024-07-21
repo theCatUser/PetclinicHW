@@ -60,7 +60,9 @@ pipeline {
             steps {
                     script {
                         sh '''
-                           systemctl status docker
+                           su - root -c groupadd docker
+                           su - root -c usermod -aG docker jenkins
+                           su - root -c systemctl restart docker
                         '''
                     }
             }
