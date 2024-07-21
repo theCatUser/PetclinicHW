@@ -60,10 +60,9 @@ pipeline {
             steps {
                     script {
                         sh '''
-                        apt-get update && apt-get install -y sudo
-                        echo 'BeniJenkins1!' | sudo -S groupadd docker
-                        echo 'BeniJenkins1!' | sudo -S usermod -aG docker jenkins
-                        echo 'BeniJenkins1!' | sudo -S systemctl restart docker
+                           echo 'BeniJenkins1!' | su - root -c groupadd docker
+                           echo 'BeniJenkins1!' | su - root -c usermod -aG docker jenkins
+                           echo 'BeniJenkins1!' | su - root -c systemctl restart docker
                         '''
                     }
             }
