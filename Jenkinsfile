@@ -56,19 +56,17 @@ pipeline {
             }
         }
 
-        stage('Add Jenkins User to Docker Group') {
-            steps {
-                    script {
-//                         def rootPassword = 'Password0!'
-                        sh '''
-//                            echo 'root:${rootPassword}' | chpasswd
-                           echo "BeniJenkins1!" | su - root -c groupadd docker
-                           echo "BeniJenkins1!" | su - root -c usermod -aG docker jenkins
-                           echo "BeniJenkins1!" | su - root -c systemctl restart docker
-                        '''
-                    }
-            }
-        }
+//         stage('Add Jenkins User to Docker Group') {
+//             steps {
+//                     script {
+//                         sh '''
+//                            echo "BeniJenkins1!" | su - root -c groupadd docker
+//                            echo "BeniJenkins1!" | su - root -c usermod -aG docker jenkins
+//                            echo "BeniJenkins1!" | su - root -c systemctl restart docker
+//                         '''
+//                     }
+//             }
+//         }
 
         stage("Build Docker Image"){
             steps{
