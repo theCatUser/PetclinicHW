@@ -6,7 +6,7 @@ pipeline {
         dockerTool 'Docker 27.0.3'
     }
     environment {
-            JAVA_URL = 'https://builds.openlogic.com/downloadJDK/openlogic-openjdk/8u412-b08/openlogic-openjdk-8u412-b08-linux-x64.tar.gz'
+            JAVA_URL = 'https://github.com/adoptium/temurin8-binaries/releases/download/jdk8u422-b05/OpenJDK8U-jdk_x64_linux_hotspot_8u422b05.tar.gz'
             JAVA_HOME_DIR = '/var/jenkins_home/tools/jdk8'
         }
 
