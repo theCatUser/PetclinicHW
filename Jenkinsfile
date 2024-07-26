@@ -11,6 +11,13 @@ pipeline {
         }
 
     stages{
+
+        stage('Prepare Environment') {
+            steps {
+                sh 'git config --global --add safe.directory /var/jenkins_home/workspace/Petclinc_HW_main'
+            }
+        }
+
         stage('Download and Unpack JDK') {
             steps {
                 script {
